@@ -1,16 +1,18 @@
 export class ToDo {
-    #id;
-    #title;
-    #description;
-    #done;
-    #userId;
+    #api;
+    todoList;
 
-    constructor(id, title, description, done, userId) {
-        this.#id = id;
-        this.#title = title;
-        this.#description = description;
-        this.#done = done;
-        this.#userId = userId;
+    constructor(api) {
+        this.#api = api;
+    }
+
+    async getResults() {
+        try {
+            const response = await fetch(this.#api);
+            this.todoList = await response.json();
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     
